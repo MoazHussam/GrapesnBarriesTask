@@ -20,6 +20,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func getData(_ sender: AnyObject) {
+        
+        let client = GnBClient()
+        client.getProducts(fromID: 0, count: 10) { (products) in
+            
+            print(products)
+        }
+    }
 
 }
 

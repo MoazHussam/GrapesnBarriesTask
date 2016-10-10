@@ -12,6 +12,10 @@
 		6FFEF8D51DAC2A13004FFD4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FFEF8D31DAC2A13004FFD4B /* Main.storyboard */; };
 		6FFEF8D71DAC2A13004FFD4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FFEF8D61DAC2A13004FFD4B /* Assets.xcassets */; };
 		6FFEF8DA1DAC2A13004FFD4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FFEF8D81DAC2A13004FFD4B /* LaunchScreen.storyboard */; };
+		6FFEF8E41DAC2A66004FFD4B /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8E31DAC2A66004FFD4B /* Product.swift */; };
+		6FFEF8E61DAC2AEF004FFD4B /* GnBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8E51DAC2AEF004FFD4B /* GnBClient.swift */; };
+		6FFEF8EA1DAC2FC0004FFD4B /* GnBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8E91DAC2FC0004FFD4B /* GnBConstants.swift */; };
+		6FFEF8EC1DAC479E004FFD4B /* GnBConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8EB1DAC479E004FFD4B /* GnBConvenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		6FFEF8D61DAC2A13004FFD4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FFEF8D91DAC2A13004FFD4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FFEF8DB1DAC2A13004FFD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FFEF8E31DAC2A66004FFD4B /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		6FFEF8E51DAC2AEF004FFD4B /* GnBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GnBClient.swift; sourceTree = "<group>"; };
+		6FFEF8E91DAC2FC0004FFD4B /* GnBConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GnBConstants.swift; sourceTree = "<group>"; };
+		6FFEF8EB1DAC479E004FFD4B /* GnBConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GnBConvenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +46,10 @@
 		6FFEF8C31DAC2A13004FFD4B = {
 			isa = PBXGroup;
 			children = (
+				6FFEF8E91DAC2FC0004FFD4B /* GnBConstants.swift */,
+				6FFEF8E31DAC2A66004FFD4B /* Product.swift */,
+				6FFEF8E51DAC2AEF004FFD4B /* GnBClient.swift */,
+				6FFEF8EB1DAC479E004FFD4B /* GnBConvenience.swift */,
 				6FFEF8CE1DAC2A13004FFD4B /* GrapesnBarriesTask */,
 				6FFEF8CD1DAC2A13004FFD4B /* Products */,
 			);
@@ -136,8 +148,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FFEF8E61DAC2AEF004FFD4B /* GnBClient.swift in Sources */,
+				6FFEF8EA1DAC2FC0004FFD4B /* GnBConstants.swift in Sources */,
 				6FFEF8D21DAC2A13004FFD4B /* ViewController.swift in Sources */,
 				6FFEF8D01DAC2A13004FFD4B /* AppDelegate.swift in Sources */,
+				6FFEF8E41DAC2A66004FFD4B /* Product.swift in Sources */,
+				6FFEF8EC1DAC479E004FFD4B /* GnBConvenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
