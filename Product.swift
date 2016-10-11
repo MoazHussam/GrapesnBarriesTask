@@ -17,8 +17,19 @@ struct Product {
     let image: ProductImage
     
     struct ProductImage {
-        let image: String
+        let url: String
         let height: Int
         let width: Int
+//        var imageData: Data?
+//
+//        init(url: String, height: Int, width: Int) {
+//            
+//            self.url = url
+//            self.height = height
+//            self.width = width
+//            
+//            self.imageData = try? Data(contentsOf: URL(string: url)!)
+//            
+//        }
     }
 }

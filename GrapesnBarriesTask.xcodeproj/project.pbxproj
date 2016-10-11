@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F2443341DACE1B20025CC3D /* ProductsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2443331DACE1B20025CC3D /* ProductsCollectionViewController.swift */; };
+		6F2443361DACE2EC0025CC3D /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2443351DACE2EC0025CC3D /* ProductsCollectionViewCell.swift */; };
 		6FFEF8D01DAC2A13004FFD4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8CF1DAC2A13004FFD4B /* AppDelegate.swift */; };
-		6FFEF8D21DAC2A13004FFD4B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8D11DAC2A13004FFD4B /* ViewController.swift */; };
 		6FFEF8D51DAC2A13004FFD4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FFEF8D31DAC2A13004FFD4B /* Main.storyboard */; };
 		6FFEF8D71DAC2A13004FFD4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FFEF8D61DAC2A13004FFD4B /* Assets.xcassets */; };
 		6FFEF8DA1DAC2A13004FFD4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FFEF8D81DAC2A13004FFD4B /* LaunchScreen.storyboard */; };
@@ -19,9 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F2443331DACE1B20025CC3D /* ProductsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewController.swift; sourceTree = "<group>"; };
+		6F2443351DACE2EC0025CC3D /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6FFEF8CC1DAC2A13004FFD4B /* GrapesnBarriesTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrapesnBarriesTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FFEF8CF1DAC2A13004FFD4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6FFEF8D11DAC2A13004FFD4B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6FFEF8D41DAC2A13004FFD4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6FFEF8D61DAC2A13004FFD4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FFEF8D91DAC2A13004FFD4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,8 +69,9 @@
 			isa = PBXGroup;
 			children = (
 				6FFEF8CF1DAC2A13004FFD4B /* AppDelegate.swift */,
-				6FFEF8D11DAC2A13004FFD4B /* ViewController.swift */,
 				6FFEF8D31DAC2A13004FFD4B /* Main.storyboard */,
+				6F2443331DACE1B20025CC3D /* ProductsCollectionViewController.swift */,
+				6F2443351DACE2EC0025CC3D /* ProductsCollectionViewCell.swift */,
 				6FFEF8D61DAC2A13004FFD4B /* Assets.xcassets */,
 				6FFEF8D81DAC2A13004FFD4B /* LaunchScreen.storyboard */,
 				6FFEF8DB1DAC2A13004FFD4B /* Info.plist */,
@@ -108,6 +111,7 @@
 				TargetAttributes = {
 					6FFEF8CB1DAC2A13004FFD4B = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 5Q89ZG6CM6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -148,11 +152,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F2443361DACE2EC0025CC3D /* ProductsCollectionViewCell.swift in Sources */,
 				6FFEF8E61DAC2AEF004FFD4B /* GnBClient.swift in Sources */,
 				6FFEF8EA1DAC2FC0004FFD4B /* GnBConstants.swift in Sources */,
-				6FFEF8D21DAC2A13004FFD4B /* ViewController.swift in Sources */,
 				6FFEF8D01DAC2A13004FFD4B /* AppDelegate.swift in Sources */,
 				6FFEF8E41DAC2A66004FFD4B /* Product.swift in Sources */,
+				6F2443341DACE1B20025CC3D /* ProductsCollectionViewController.swift in Sources */,
 				6FFEF8EC1DAC479E004FFD4B /* GnBConvenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5Q89ZG6CM6;
 				INFOPLIST_FILE = GrapesnBarriesTask/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = moaz.com.GrapesnBarriesTask;
@@ -288,6 +294,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5Q89ZG6CM6;
 				INFOPLIST_FILE = GrapesnBarriesTask/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = moaz.com.GrapesnBarriesTask;
@@ -315,6 +322,7 @@
 				6FFEF8E01DAC2A13004FFD4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
