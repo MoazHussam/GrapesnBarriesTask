@@ -26,20 +26,10 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
-        productDescription.text = product?.description
+        productDescription.text = product?.productDescription
         price.text = "$\((product?.price)!)"
-        
-        DispatchQueue.global(qos: .userInteractive).async {
-            let url = URL(string: self.product!.image.url)!
-            let data = try? Data(contentsOf: url)
-          
-            if let imageData = data {
-                DispatchQueue.main.async {
-                    self.imageView.image = UIImage(data: imageData)
-                }
-            }
-            
+        if product?.image != nil {
+            imageView.image = UIImage(data: (product?.image)!)
         }
-
     }
 }

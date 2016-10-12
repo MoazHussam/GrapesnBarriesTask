@@ -73,8 +73,9 @@ extension GnBClient {
                     return
                 }
                 
-                let image = Product.ProductImage(url: imageUrl, height: imageHeight, width: imageWidth)
-                let product = Product(id: id, description: description, price: price, image: image)
+                let product = Product(id: id, description: description, price: price)
+                product.imageUrl = imageUrl
+                product.imageSize = (imageWidth, imageHeight)
                 resultProducts.append(product)
 
             }

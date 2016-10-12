@@ -17,7 +17,14 @@ class ProductsCollectionViewController: UICollectionViewController {
 //            DispatchQueue.main.async {
 //                self.collectionView!.reloadData()
 //            }
-            collectionView!.reloadData()
+            updateUI()
+        }
+    }
+    
+    @objc private func updateUI() {
+        
+        DispatchQueue.main.async {
+            self.collectionView!.reloadData()
         }
     }
     
@@ -32,9 +39,11 @@ class ProductsCollectionViewController: UICollectionViewController {
         
         let width = (collectionView!.frame.width - leftAndRightPaddings) / numberOfItemsPerRow
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width * 2)
+        layout.itemSize = CGSize(width: width, height: width * 3.5)
         
-        GnBClient.sharedInstance().getProducts(fromID: 0, count: 4, products: { (productsArray) in
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name(rawValue: imageDataHasFinishedDownloadingNotification), object: nil)
+        
+        GnBClient.sharedInstance().getProducts(fromID: 0, count: 14, products: { (productsArray) in
             
             self.products = productsArray!
             print(self.products)
@@ -45,20 +54,9 @@ class ProductsCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidAppear(_ animated: Bool) {
+        updateUI()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 

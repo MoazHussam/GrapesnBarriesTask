@@ -9,27 +9,56 @@
 import Foundation
 import UIKit
 
-struct Product {
+let imageDataHasFinishedDownloadingNotification = "com.moazahmeed.imageDataHasFinishedDownloadingNotification"
+
+class Product {
     
     let id:Int
-    let description: String
+    let productDescription: String
     let price: Float
-    let image: ProductImage
-    
-    struct ProductImage {
-        let url: String
-        let height: Int
-        let width: Int
-//        var imageData: Data?
-//
-//        init(url: String, height: Int, width: Int) {
-//            
-//            self.url = url
-//            self.height = height
-//            self.width = width
-//            
-//            self.imageData = try? Data(contentsOf: URL(string: url)!)
-//            
-//        }
+    var image: Data?
+    var imageSize: (width: Int, height: Int)?
+    var imageUrl: String? {
+        didSet {
+            getImage { (image) in
+
+                self.image = image
+                NotificationCenter.default.post(name: Notification.Name(rawValue: imageDataHasFinishedDownloadingNotification), object: self)
+            }
+        }
     }
-}
+    
+    init(id: Int, description: String, price: Float) {
+        self.id = id
+        self.productDescription = description
+        self.price = price
+    }
+    
+    
+    
+//    convenience init(id: Int, description: String, price: Float, imageUrl: String, imageWidth: Int, imageHeight: Int) {
+//        
+//        self.init(id: id,description: description,price: price)
+//        
+//        self.imageUrl = imageUrl
+//        self.imageSize = (imageWidth, imageHeight)
+//    }
+    
+    
+        func getImage(completionHandler: @escaping (Data?) -> Void) {
+            
+            DispatchQueue.global(qos: .userInteractive).async {
+                let url = URL(string: self.imageUrl!)!
+                let data = try? Data(contentsOf: url)
+                
+                if let imageData = data {
+                    completionHandler(imageData)
+                } else {
+                    completionHandler(nil)
+                }
+                
+            }
+
+        }
+    }
+
