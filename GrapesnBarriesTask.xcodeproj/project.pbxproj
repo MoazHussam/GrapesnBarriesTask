@@ -19,6 +19,7 @@
 		6FFEF8E61DAC2AEF004FFD4B /* GnBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8E51DAC2AEF004FFD4B /* GnBClient.swift */; };
 		6FFEF8EA1DAC2FC0004FFD4B /* GnBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8E91DAC2FC0004FFD4B /* GnBConstants.swift */; };
 		6FFEF8EC1DAC479E004FFD4B /* GnBConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFEF8EB1DAC479E004FFD4B /* GnBConvenience.swift */; };
+		80CDE8DEF87A21969229FEF7 /* Pods_GrapesnBarriesTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09F365BEA23CCF61B23B3CF /* Pods_GrapesnBarriesTask.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,9 @@
 		6FFEF8E51DAC2AEF004FFD4B /* GnBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GnBClient.swift; sourceTree = "<group>"; };
 		6FFEF8E91DAC2FC0004FFD4B /* GnBConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GnBConstants.swift; sourceTree = "<group>"; };
 		6FFEF8EB1DAC479E004FFD4B /* GnBConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GnBConvenience.swift; sourceTree = "<group>"; };
+		A19ED9E0BBA6941C43A50ADF /* Pods-GrapesnBarriesTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrapesnBarriesTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GrapesnBarriesTask/Pods-GrapesnBarriesTask.debug.xcconfig"; sourceTree = "<group>"; };
+		D09F365BEA23CCF61B23B3CF /* Pods_GrapesnBarriesTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrapesnBarriesTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4E7904D81928A125748F762 /* Pods-GrapesnBarriesTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrapesnBarriesTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-GrapesnBarriesTask/Pods-GrapesnBarriesTask.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +47,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80CDE8DEF87A21969229FEF7 /* Pods_GrapesnBarriesTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F401B643EB61CDC72828C34 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A19ED9E0BBA6941C43A50ADF /* Pods-GrapesnBarriesTask.debug.xcconfig */,
+				E4E7904D81928A125748F762 /* Pods-GrapesnBarriesTask.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6F6A4F061DAF6AFE003B6228 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +98,8 @@
 				6F6A4F061DAF6AFE003B6228 /* Model */,
 				6FFEF8CE1DAC2A13004FFD4B /* GrapesnBarriesTask */,
 				6FFEF8CD1DAC2A13004FFD4B /* Products */,
+				1F401B643EB61CDC72828C34 /* Pods */,
+				8F7BA8536AD6FA3F10583454 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +125,14 @@
 			path = GrapesnBarriesTask;
 			sourceTree = "<group>";
 		};
+		8F7BA8536AD6FA3F10583454 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D09F365BEA23CCF61B23B3CF /* Pods_GrapesnBarriesTask.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -116,9 +140,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FFEF8DE1DAC2A13004FFD4B /* Build configuration list for PBXNativeTarget "GrapesnBarriesTask" */;
 			buildPhases = (
+				E71EC727C219E340EBC0BBAA /* [CP] Check Pods Manifest.lock */,
 				6FFEF8C81DAC2A13004FFD4B /* Sources */,
 				6FFEF8C91DAC2A13004FFD4B /* Frameworks */,
 				6FFEF8CA1DAC2A13004FFD4B /* Resources */,
+				97704539F2768ACE00A5EAB7 /* [CP] Embed Pods Frameworks */,
+				F2E31C721F35D8AFD5142060 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,6 +203,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		97704539F2768ACE00A5EAB7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GrapesnBarriesTask/Pods-GrapesnBarriesTask-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E71EC727C219E340EBC0BBAA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F2E31C721F35D8AFD5142060 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GrapesnBarriesTask/Pods-GrapesnBarriesTask-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6FFEF8C81DAC2A13004FFD4B /* Sources */ = {
@@ -311,6 +386,7 @@
 		};
 		6FFEF8DF1DAC2A13004FFD4B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A19ED9E0BBA6941C43A50ADF /* Pods-GrapesnBarriesTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5Q89ZG6CM6;
@@ -324,6 +400,7 @@
 		};
 		6FFEF8E01DAC2A13004FFD4B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4E7904D81928A125748F762 /* Pods-GrapesnBarriesTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5Q89ZG6CM6;
