@@ -49,13 +49,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6FFEF8C31DAC2A13004FFD4B = {
+		6F6A4F061DAF6AFE003B6228 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F6A4F071DAF6B13003B6228 /* API Wrapper */,
+				6FFEF8E31DAC2A66004FFD4B /* Product.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6F6A4F071DAF6B13003B6228 /* API Wrapper */ = {
 			isa = PBXGroup;
 			children = (
 				6FFEF8E91DAC2FC0004FFD4B /* GnBConstants.swift */,
-				6FFEF8E31DAC2A66004FFD4B /* Product.swift */,
 				6FFEF8E51DAC2AEF004FFD4B /* GnBClient.swift */,
 				6FFEF8EB1DAC479E004FFD4B /* GnBConvenience.swift */,
+			);
+			name = "API Wrapper";
+			sourceTree = "<group>";
+		};
+		6F6A4F081DAF6B3B003B6228 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6F9C9FC31DAE549F00B1450F /* ProductsLayout.swift */,
+				6F2443351DACE2EC0025CC3D /* ProductsCollectionViewCell.swift */,
+				6F9C9FC51DAE7AC600B1450F /* RoundedCornersView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		6FFEF8C31DAC2A13004FFD4B = {
+			isa = PBXGroup;
+			children = (
+				6F6A4F061DAF6AFE003B6228 /* Model */,
 				6FFEF8CE1DAC2A13004FFD4B /* GrapesnBarriesTask */,
 				6FFEF8CD1DAC2A13004FFD4B /* Products */,
 			);
@@ -75,12 +101,10 @@
 				6FFEF8CF1DAC2A13004FFD4B /* AppDelegate.swift */,
 				6FFEF8D31DAC2A13004FFD4B /* Main.storyboard */,
 				6F2443331DACE1B20025CC3D /* ProductsCollectionViewController.swift */,
-				6F9C9FC31DAE549F00B1450F /* ProductsLayout.swift */,
-				6F2443351DACE2EC0025CC3D /* ProductsCollectionViewCell.swift */,
+				6F6A4F081DAF6B3B003B6228 /* Views */,
 				6FFEF8D61DAC2A13004FFD4B /* Assets.xcassets */,
 				6FFEF8D81DAC2A13004FFD4B /* LaunchScreen.storyboard */,
 				6FFEF8DB1DAC2A13004FFD4B /* Info.plist */,
-				6F9C9FC51DAE7AC600B1450F /* RoundedCornersView.swift */,
 			);
 			path = GrapesnBarriesTask;
 			sourceTree = "<group>";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qss-Vp-ZI1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eh6-45-l5K">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -7,61 +7,12 @@
     </dependencies>
     <scenes>
         <!--Products-->
-        <scene sceneID="bxh-g4-x1l">
-            <objects>
-                <collectionViewController id="iM2-0H-IN5" customClass="ProductsCollectionViewController" customModule="GrapesnBarriesTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ABS-mX-hid">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewLayout key="collectionViewLayout" id="V4V-5l-s04" customClass="ProductsLayout" customModule="GrapesnBarriesTask" customModuleProvider="target"/>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductsCell" id="vNk-9F-weB" customClass="ProductsCollectionViewCell" customModule="GrapesnBarriesTask" customModuleProvider="target">
-                                <rect key="frame" x="30" y="0.0" width="315" height="270"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="315" height="270"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1M6-Eq-JfW">
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rlI-qQ-edc">
-                                                    <frame key="frameInset" width="240" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="1M6-Eq-JfW" firstAttribute="leading" secondItem="vNk-9F-weB" secondAttribute="leading" id="5zq-d7-oK6"/>
-                                    <constraint firstAttribute="bottom" secondItem="1M6-Eq-JfW" secondAttribute="bottom" id="Doc-qa-m8K"/>
-                                    <constraint firstItem="1M6-Eq-JfW" firstAttribute="top" secondItem="vNk-9F-weB" secondAttribute="top" id="Q4i-LR-kdQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="1M6-Eq-JfW" secondAttribute="trailing" id="pQ9-Do-e5z"/>
-                                </constraints>
-                                <size key="customSize" width="315" height="270"/>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="iM2-0H-IN5" id="yQT-ne-CB1"/>
-                            <outlet property="delegate" destination="iM2-0H-IN5" id="6yf-j9-mrS"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="Products" id="zuZ-hE-0eN"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="r6c-DL-pQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="668" y="-158.77061469265368"/>
-        </scene>
-        <!--Products-->
         <scene sceneID="uX1-Wb-ULl">
             <objects>
                 <collectionViewController id="Eh6-45-l5K" customClass="ProductsCollectionViewController" customModule="GrapesnBarriesTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="9jP-Jy-Mtl">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="9jP-Jy-Mtl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="J3w-My-DxQ" customClass="ProductsLayout" customModule="GrapesnBarriesTask" customModuleProvider="target"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductsCell" id="FwY-3p-cue" customClass="ProductsCollectionViewCell" customModule="GrapesnBarriesTask" customModuleProvider="target">
@@ -73,16 +24,15 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vva-aJ-7RX" customClass="RoundedCornersView" customModule="GrapesnBarriesTask" customModuleProvider="target">
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A_blank_flag" translatesAutoresizingMaskIntoConstraints="NO" id="Vva-e6-ITl">
-                                                    <color key="backgroundColor" red="0.48148902970385665" green="0.7105582392273353" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vva-e6-ITl">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="ipN-Pp-R5t"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-xw-9ON">
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.047570198774337769" green="0.36075371503829956" blue="0.16428309679031372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8x-84-TCq">
@@ -106,7 +56,7 @@
                                                     <blurEffect style="light"/>
                                                 </visualEffectView>
                                             </subviews>
-                                            <color key="backgroundColor" red="1" green="0.62745658535463089" blue="0.67198538839944622" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.047570198774337769" green="0.36075371503829956" blue="0.16428309679031372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="jBo-xw-9ON" firstAttribute="top" secondItem="Vva-e6-ITl" secondAttribute="bottom" constant="4" id="41M-08-m7k"/>
                                                 <constraint firstAttribute="trailing" secondItem="Vva-e6-ITl" secondAttribute="trailing" id="599-Gw-cD6"/>
@@ -153,44 +103,5 @@
             </objects>
             <point key="canvasLocation" x="1352.8" y="552.77361319340332"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="C4k-EW-KCH">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vET-BD-xXU" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZeJ-zL-cvj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="iM2-0H-IN5" kind="relationship" relationship="rootViewController" id="ZgH-Pf-Iui"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ya-Oj-bHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-271.19999999999999" y="-158.77061469265368"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Fdq-uj-bF4">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qss-Vp-ZI1" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nho-Hs-lrB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Eh6-45-l5K" kind="relationship" relationship="rootViewController" id="sAY-zS-t9r"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xvM-NZ-Of5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="413.60000000000002" y="552.77361319340332"/>
-        </scene>
     </scenes>
-    <resources>
-        <image name="A_blank_flag" width="500" height="300"/>
-    </resources>
 </document>

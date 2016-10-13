@@ -50,6 +50,11 @@ class ProductsCollectionViewController: UICollectionViewController {
             layout.delegate = self
         }
         
+        if let patternImage = UIImage(named: "Pattern") {
+            view.backgroundColor = UIColor(patternImage: patternImage)
+        }
+        collectionView!.backgroundColor = UIColor.clear
+        
         collectionView!.contentInset = UIEdgeInsets(top: 23, left: 5, bottom: 10, right: 5)
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name(rawValue: imageDataDidFinishedDownloadingNotification), object: nil)
