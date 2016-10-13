@@ -13,6 +13,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var productDescription: UILabel!
+    @IBOutlet weak var imageViewHeightLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var price: UILabel!
     
     
@@ -32,4 +33,12 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             imageView.image = UIImage(data: (product?.image)!)
         }
     }
+    
+    override func apply(_ layoutAttributes: (UICollectionViewLayoutAttributes!)) {
+        super.apply(layoutAttributes)
+        if let attributes = layoutAttributes as? ProductsLayoutAttributes {
+            imageViewHeightLayoutConstraint.constant = attributes.imageHeight
+        }
+    }
+
 }

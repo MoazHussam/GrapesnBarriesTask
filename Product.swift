@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let imageDataHasFinishedDownloadingNotification = "com.moazahmeed.imageDataHasFinishedDownloadingNotification"
+let imageDataDidFinishedDownloadingNotification = "com.moazahmeed.imageDataDidFinishedDownloadingNotification"
 
 class Product {
     
@@ -20,10 +20,10 @@ class Product {
     var imageSize: (width: Int, height: Int)?
     var imageUrl: String? {
         didSet {
-            getImage { (image) in
+            getImage(forProduct: self) { (image) in
 
-                self.image = image
-                NotificationCenter.default.post(name: Notification.Name(rawValue: imageDataHasFinishedDownloadingNotification), object: self)
+                //self.image = image
+                NotificationCenter.default.post(name: Notification.Name(rawValue: imageDataDidFinishedDownloadingNotification), object: self)
             }
         }
     }
@@ -34,24 +34,14 @@ class Product {
         self.price = price
     }
     
-    
-    
-//    convenience init(id: Int, description: String, price: Float, imageUrl: String, imageWidth: Int, imageHeight: Int) {
-//        
-//        self.init(id: id,description: description,price: price)
-//        
-//        self.imageUrl = imageUrl
-//        self.imageSize = (imageWidth, imageHeight)
-//    }
-    
-    
-        func getImage(completionHandler: @escaping (Data?) -> Void) {
+    func getImage(forProduct product: Product, completionHandler: @escaping (Data?) -> Void) {
             
             DispatchQueue.global(qos: .userInteractive).async {
                 let url = URL(string: self.imageUrl!)!
                 let data = try? Data(contentsOf: url)
                 
                 if let imageData = data {
+                    product.image = imageData
                     completionHandler(imageData)
                 } else {
                     completionHandler(nil)
@@ -62,3 +52,10 @@ class Product {
         }
     }
 
+extension Product {
+    
+    func heightForDescription(font: UIFont, width: CGFloat) -> CGFloat {
+        let rect = NSString(string: productDescription).boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return ceil(rect.height)
+    }
+}
