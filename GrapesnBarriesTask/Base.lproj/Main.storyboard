@@ -10,7 +10,7 @@
         <scene sceneID="uX1-Wb-ULl">
             <objects>
                 <collectionViewController id="Eh6-45-l5K" customClass="ProductsCollectionViewController" customModule="GrapesnBarriesTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="9jP-Jy-Mtl">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="9jP-Jy-Mtl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewLayout key="collectionViewLayout" id="J3w-My-DxQ" customClass="ProductsLayout" customModule="GrapesnBarriesTask" customModuleProvider="target"/>
@@ -24,6 +24,7 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vva-aJ-7RX" customClass="RoundedCornersView" customModule="GrapesnBarriesTask" customModuleProvider="target">
                                             <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="U6G-P5-vJg"/>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vva-e6-ITl">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="ipN-Pp-R5t"/>
@@ -64,8 +65,10 @@
                                                 <constraint firstItem="Vva-e6-ITl" firstAttribute="top" secondItem="vva-aJ-7RX" secondAttribute="top" id="FQR-em-O8E"/>
                                                 <constraint firstItem="jBo-xw-9ON" firstAttribute="width" secondItem="vva-aJ-7RX" secondAttribute="width" id="Gfs-qK-GvG"/>
                                                 <constraint firstItem="Vva-e6-ITl" firstAttribute="leading" secondItem="vva-aJ-7RX" secondAttribute="leading" id="cqn-Yu-AIF"/>
+                                                <constraint firstItem="U6G-P5-vJg" firstAttribute="centerX" secondItem="vva-aJ-7RX" secondAttribute="centerX" id="nsR-yu-10h"/>
                                                 <constraint firstItem="g8x-84-TCq" firstAttribute="leading" secondItem="Vva-e6-ITl" secondAttribute="trailing" constant="-39" id="ooY-Sa-oaR"/>
                                                 <constraint firstItem="Vva-e6-ITl" firstAttribute="top" secondItem="g8x-84-TCq" secondAttribute="bottom" constant="-21" id="tA8-sq-6W9"/>
+                                                <constraint firstItem="U6G-P5-vJg" firstAttribute="centerY" secondItem="vva-aJ-7RX" secondAttribute="centerY" id="tli-Gm-7Pu"/>
                                                 <constraint firstAttribute="bottom" secondItem="jBo-xw-9ON" secondAttribute="bottom" id="vBQ-ni-emx"/>
                                                 <constraint firstAttribute="trailing" secondItem="jBo-xw-9ON" secondAttribute="trailing" id="w3k-5P-LYK"/>
                                             </constraints>
@@ -85,6 +88,7 @@
                                 </constraints>
                                 <size key="customSize" width="180" height="180"/>
                                 <connections>
+                                    <outlet property="imageLoadingSpinner" destination="U6G-P5-vJg" id="vsN-f2-B7d"/>
                                     <outlet property="imageView" destination="Vva-e6-ITl" id="qZ0-ch-hhE"/>
                                     <outlet property="imageViewHeightLayoutConstraint" destination="ipN-Pp-R5t" id="QsF-HG-Rc1"/>
                                     <outlet property="price" destination="HKg-Aa-Sv4" id="DQk-CA-460"/>

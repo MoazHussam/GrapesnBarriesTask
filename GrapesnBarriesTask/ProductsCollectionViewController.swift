@@ -13,67 +13,58 @@ private let reuseIdentifier = "ProductsCell"
 
 class ProductsCollectionViewController: UICollectionViewController {
     
-    var labelHeights = [IndexPath:CGFloat]()
-    var fontd: UIFont!
     
-    var getNextTenProducts: (() -> Void)!
+    // MARK: Global Constants
+    let patchCount = 3
     
+    // MARK: Global Variables
+    var labelFont: UIFont!
+    var getNextThreeProducts: (() -> Void)!
     var products: [Product]? {
         didSet {
+            //clear cache layout to calculate new layout for the new data
             (collectionView?.collectionViewLayout as? ProductsLayout)?.clearLayout()
             updateUI()
         }
     }
     
+    // update collection view cells and layout
     @objc private func updateUI() {
-        
-        //(collectionView?.collectionViewLayout as? ProductsLayout)?.clearLayout()
+
         DispatchQueue.main.async {
             self.collectionView!.reloadData()
         }
     }
     
-//    private let leftAndRightPaddings: CGFloat = 24.0
-//    private let numberOfItemsPerRow: CGFloat = 2.0
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-//        let width = (collectionView!.frame.width - leftAndRightPaddings) / numberOfItemsPerRow
-//        let layout = collectionViewLayout as! UICollectionViewFlowLayout
-//        layout.itemSize = CGSize(width: width, height: width * 2)
-
+        //set custom layout delegate
         if let layout = collectionView?.collectionViewLayout as? ProductsLayout {
             layout.delegate = self
         }
         
+        // set view visual look
         if let patternImage = UIImage(named: "Pattern") {
             view.backgroundColor = UIColor(patternImage: patternImage)
         }
         collectionView!.backgroundColor = UIColor.clear
-        
         collectionView!.contentInset = UIEdgeInsets(top: 23, left: 5, bottom: 10, right: 5)
         
+        //register for notification that product images finished downloading in the backgroud
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name(rawValue: imageDataDidFinishedDownloadingNotification), object: nil)
         
-
-//        GnBClient.sharedInstance().getProducts(fromID: 0 , count: 10, products: { (productsArray) in
-//            
-//            self.products? += productsArray!
-//            print("Products Fetched")
-//        })
+        // get products fetcher
+        getNextThreeProducts = makeProductsFetcher()
         
-        getNextTenProducts = makeProductsFetcher(forPatchCount: 10)
-        
-        getNextTenProducts()
-        getNextTenProducts()
+        getNextThreeProducts()
+        getNextThreeProducts()
 
     }
 
-
+    // MARK: scrollView Delegate Methods
+    
+    // when scroll ends add new cells
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if collectionView?.window == nil { return }
@@ -81,26 +72,12 @@ class ProductsCollectionViewController: UICollectionViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        if offsetY > contentHeight - scrollView.frame.size.height + 50 {
+        if offsetY > contentHeight - scrollView.frame.size.height + 20 {
             print("scroll ended")
-            getNextTenProducts()
+            getNextThreeProducts()
             collectionView?.reloadData()
         }
 
-    }
-    
-    func makeProductsFetcher(forPatchCount patchCount: Int) -> () -> Void {
-        
-        var startID = 0
-        
-        func fetchNextPatch() {
-            
-            fetchProducts(fromID: startID, count: patchCount)
-            
-            startID += patchCount
-        }
-        
-        return fetchNextPatch
     }
     
     func fetchProducts(fromID startID:Int, count patchCount:Int) {
@@ -117,9 +94,7 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     func reorderProducts() {
         
-        products?.sort(by: { (s1 , s2) -> Bool in
-            s1.id < s2.id
-        })
+        products?.sort { $0.id < $1.id }
     }
     
     // MARK: UICollectionViewDataSource
@@ -140,11 +115,13 @@ class ProductsCollectionViewController: UICollectionViewController {
     
         // Configure the cell
         
+        //clear cache for reusable cells to clean cached images
         cell.clearCache()
         
         cell.product = products?[indexPath.item]
-        //labelHeights[indexPath] = cell.productDescription.requiredHeight()
-        fontd = cell.productDescription.font
+        
+        //need font to calculate label height at runtime
+        labelFont = cell.productDescription.font
         
         return cell
     }
@@ -154,6 +131,7 @@ class ProductsCollectionViewController: UICollectionViewController {
 
 extension ProductsCollectionViewController : ProductsLayoutDelegate {
     
+    //get height of product's image for given width maintaining aspect ratio
     func heightForImageAtIndexPath(indexPath:IndexPath , withWidth width:CGFloat) -> CGFloat {
         
         let product = products?[indexPath.item]
@@ -170,10 +148,11 @@ extension ProductsCollectionViewController : ProductsLayoutDelegate {
         return width
     }
     
+    // get height for description text for a given font
     func heightForDescriptionAtIndexPath(indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
     
         let cellPadding = CGFloat(4)
-        let textHeight = products?[indexPath.item].heightForDescription(font: fontd, width: width)
+        let textHeight = products?[indexPath.item].heightForDescription(font: labelFont, width: width)
         
         if let height = textHeight {
             return cellPadding + height + cellPadding
@@ -183,30 +162,19 @@ extension ProductsCollectionViewController : ProductsLayoutDelegate {
         
     }
     
-    
-}
-
-
-extension UILabel{
-    
-    func requiredHeight(width: CGFloat) -> CGFloat{
+    // return fetcher function to fetch products
+    func makeProductsFetcher() -> () -> Void {
         
-        let label:UILabel = UILabel(frame: CGRect(x:0, y:0, width:width, height:CGFloat.greatestFiniteMagnitude))
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byTruncatingTail
-        label.font = self.font
-        label.text = self.text
+        var startID = 0
         
-        label.sizeToFit()
+        func fetchNextPatch() {
+            
+            fetchProducts(fromID: startID, count: patchCount)
+            
+            startID += patchCount
+        }
         
-        print("Label required Height: \(label.frame.height)")
-        
-        return label.frame.height
+        return fetchNextPatch
     }
     
-    func requiredHeight() -> CGFloat{
-        
-        
-        return requiredHeight(width: self.frame.width)
-    }
 }

@@ -15,6 +15,11 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productDescription: UILabel!
     @IBOutlet weak var imageViewHeightLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var imageLoadingSpinner: UIActivityIndicatorView! {
+        didSet {
+            imageLoadingSpinner.startAnimating()
+        }
+    }
     
     
     var product: Product? {
@@ -30,7 +35,8 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         productDescription.text = product?.productDescription
         price.text = "$\((product?.price)!)"
         if product?.image != nil {
-            imageView.image = UIImage(data: (product?.image)!)
+            imageView.image = UIImage(data: product!.image!)
+            imageLoadingSpinner.stopAnimating()
         }
     }
     

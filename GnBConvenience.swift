@@ -17,6 +17,7 @@ extension GnBClient {
         
         let method = HTTPMethod(name: HTTPMethodName.getProducts, parameters: parameters, type: .GET, httpBody: nil, httpHeaders: nil)
         
+        // perform HTTP method a get back data
         performHTTPMethod(method: method) { (data, error) in
             
             
@@ -84,8 +85,5 @@ extension GnBClient {
         }
         
     }
-    
-    
-    
     
 }

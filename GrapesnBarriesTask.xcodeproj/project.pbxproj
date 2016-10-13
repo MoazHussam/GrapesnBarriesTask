@@ -70,6 +70,7 @@
 				6FFEF8E31DAC2A66004FFD4B /* Product.swift */,
 			);
 			name = Model;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		6F6A4F071DAF6B13003B6228 /* API Wrapper */ = {
@@ -95,7 +96,6 @@
 		6FFEF8C31DAC2A13004FFD4B = {
 			isa = PBXGroup;
 			children = (
-				6F6A4F061DAF6AFE003B6228 /* Model */,
 				6FFEF8CE1DAC2A13004FFD4B /* GrapesnBarriesTask */,
 				6FFEF8CD1DAC2A13004FFD4B /* Products */,
 				1F401B643EB61CDC72828C34 /* Pods */,
@@ -114,6 +114,7 @@
 		6FFEF8CE1DAC2A13004FFD4B /* GrapesnBarriesTask */ = {
 			isa = PBXGroup;
 			children = (
+				6F6A4F061DAF6AFE003B6228 /* Model */,
 				6FFEF8CF1DAC2A13004FFD4B /* AppDelegate.swift */,
 				6FFEF8D31DAC2A13004FFD4B /* Main.storyboard */,
 				6F2443331DACE1B20025CC3D /* ProductsCollectionViewController.swift */,
