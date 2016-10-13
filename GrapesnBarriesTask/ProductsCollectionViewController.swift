@@ -16,18 +16,18 @@ class ProductsCollectionViewController: UICollectionViewController {
     var labelHeights = [IndexPath:CGFloat]()
     var fontd: UIFont!
     
+    var getNextTenProducts: (() -> Void)!
+    
     var products: [Product]? {
         didSet {
-//            DispatchQueue.main.async {
-//                self.collectionView!.reloadData()
-//            }
+            (collectionView?.collectionViewLayout as? ProductsLayout)?.clearLayout()
             updateUI()
         }
     }
     
     @objc private func updateUI() {
         
-        (collectionView?.collectionViewLayout as? ProductsLayout)?.clearLayout()
+        //(collectionView?.collectionViewLayout as? ProductsLayout)?.clearLayout()
         DispatchQueue.main.async {
             self.collectionView!.reloadData()
         }
@@ -59,21 +59,69 @@ class ProductsCollectionViewController: UICollectionViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name(rawValue: imageDataDidFinishedDownloadingNotification), object: nil)
         
-        GnBClient.sharedInstance().getProducts(fromID: 0, count: 14, products: { (productsArray) in
+
+//        GnBClient.sharedInstance().getProducts(fromID: 0 , count: 10, products: { (productsArray) in
+//            
+//            self.products? += productsArray!
+//            print("Products Fetched")
+//        })
+        
+        getNextTenProducts = makeProductsFetcher(forPatchCount: 10)
+        
+        getNextTenProducts()
+        getNextTenProducts()
+
+    }
+
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if collectionView?.window == nil { return }
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.size.height + 50 {
+            print("scroll ended")
+            getNextTenProducts()
+            collectionView?.reloadData()
+        }
+
+    }
+    
+    func makeProductsFetcher(forPatchCount patchCount: Int) -> () -> Void {
+        
+        var startID = 0
+        
+        func fetchNextPatch() {
             
-            self.products = productsArray!
-            print(self.products)
+            fetchProducts(fromID: startID, count: patchCount)
+            
+            startID += patchCount
+        }
+        
+        return fetchNextPatch
+    }
+    
+    func fetchProducts(fromID startID:Int, count patchCount:Int) {
+        
+        GnBClient.sharedInstance().getProducts(fromID: startID , count: patchCount, products: { (productsArray) in
+            
+            guard self.products != nil || productsArray != nil else { return }
+            self.products = (self.products ?? [Product]()) + (productsArray ?? [Product]())
+            self.reorderProducts()
+            print("\(patchCount) Products fetched starting from ID: \(startID)")
             
         })
-
-
-        // Do any additional setup after loading the view.
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        //updateUI()
+    
+    func reorderProducts() {
+        
+        products?.sort(by: { (s1 , s2) -> Bool in
+            s1.id < s2.id
+        })
     }
-
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -84,13 +132,15 @@ class ProductsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return (products?.count) ?? 5
+        return (products?.count) ?? 2
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProductsCollectionViewCell
     
         // Configure the cell
+        
+        cell.clearCache()
         
         cell.product = products?[indexPath.item]
         //labelHeights[indexPath] = cell.productDescription.requiredHeight()

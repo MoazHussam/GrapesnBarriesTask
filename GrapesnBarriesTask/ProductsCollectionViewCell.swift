@@ -34,6 +34,10 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func clearCache() {
+        imageView.image = UIImage()
+    }
+    
     override func apply(_ layoutAttributes: (UICollectionViewLayoutAttributes!)) {
         super.apply(layoutAttributes)
         if let attributes = layoutAttributes as? ProductsLayoutAttributes {

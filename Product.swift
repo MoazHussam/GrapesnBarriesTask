@@ -36,21 +36,25 @@ class Product {
     
     func getImage(forProduct product: Product, completionHandler: @escaping (Data?) -> Void) {
             
-            DispatchQueue.global(qos: .userInteractive).async {
-                let url = URL(string: self.imageUrl!)!
-                let data = try? Data(contentsOf: url)
-                
-                if let imageData = data {
-                    product.image = imageData
-                    completionHandler(imageData)
-                } else {
-                    completionHandler(nil)
-                }
-                
+        if product.image != nil { return }
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            let url = URL(string: self.imageUrl!)!
+            let data = try? Data(contentsOf: url)
+            
+            if let imageData = data {
+                product.image = imageData
+                completionHandler(imageData)
+            } else {
+                print("Failed to fetch image id \(product.id), attempting again")
+                self.getImage(forProduct: product, completionHandler: completionHandler)
+                return
             }
-
+            
         }
+        
     }
+}
 
 extension Product {
     
