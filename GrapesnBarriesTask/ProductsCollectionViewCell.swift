@@ -41,13 +41,13 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
+        imageLoadingSpinner.startAnimating()
         productDescription.text = product?.productDescription
         price.text = "$\((product?.price)!)"
         if product?.image != nil {
             imageView.image = UIImage(data: product!.image!)
-            if imageView.image == UIImage(data: product!.image!){
-                imageLoadingSpinner.stopAnimating()
-            }
+            imageLoadingSpinner.stopAnimating()
+            
         }
     }
     

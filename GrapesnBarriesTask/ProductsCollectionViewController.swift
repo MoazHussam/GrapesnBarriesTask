@@ -22,6 +22,7 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     // MARK: Global Variables
     var labelFont: UIFont!
+    var scrollViewReachedBottom = false
     var getNextThreeProducts: (() -> Void)!
     var products: [Product]? {
         didSet {
@@ -88,13 +89,17 @@ class ProductsCollectionViewController: UICollectionViewController {
         
         if collectionView?.window == nil { return }
         
+        let offsetTolerance = CGFloat(30)
+        
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        if offsetY > contentHeight - scrollView.frame.size.height + 20 {
+        if offsetY > contentHeight - scrollView.frame.size.height + offsetTolerance, !scrollViewReachedBottom {
             print("scroll ended")
             getNextThreeProducts()
-            //collectionView?.reloadData()
+            scrollViewReachedBottom = true
+        } else if offsetY < contentHeight - scrollView.frame.size.height - offsetTolerance {
+            scrollViewReachedBottom = false
         }
 
     }
