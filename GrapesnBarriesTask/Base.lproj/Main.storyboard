@@ -102,8 +102,32 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Products" id="CwE-iY-p9X"/>
+                    <connections>
+                        <outlet property="headerView" destination="uLb-eh-UJr" id="jlV-OX-tns"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gOe-Ra-86v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="uLb-eh-UJr" customClass="HeaderReusableView" customModule="GrapesnBarriesTask" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="380" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MtW-sk-LAZ">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.047570198774337769" green="0.36075371503829956" blue="0.16428309679031372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="MtW-sk-LAZ" firstAttribute="centerX" secondItem="uLb-eh-UJr" secondAttribute="centerX" id="FhJ-a3-GJU"/>
+                        <constraint firstItem="MtW-sk-LAZ" firstAttribute="centerY" secondItem="uLb-eh-UJr" secondAttribute="centerY" id="kk9-70-TWo"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </objects>
             <point key="canvasLocation" x="1352.8" y="552.77361319340332"/>
         </scene>

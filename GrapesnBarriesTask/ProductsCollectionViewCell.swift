@@ -21,6 +21,15 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.frame.size = CGSize(width: 367, height: 750)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     var product: Product? {
         didSet {
@@ -36,7 +45,9 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         price.text = "$\((product?.price)!)"
         if product?.image != nil {
             imageView.image = UIImage(data: product!.image!)
-            imageLoadingSpinner.stopAnimating()
+            if imageView.image == UIImage(data: product!.image!){
+                imageLoadingSpinner.stopAnimating()
+            }
         }
     }
     
@@ -50,5 +61,5 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             imageViewHeightLayoutConstraint.constant = attributes.imageHeight
         }
     }
-
+    
 }

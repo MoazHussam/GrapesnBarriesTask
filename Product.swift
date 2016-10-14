@@ -36,7 +36,7 @@ class Product {
             
         if product.image != nil { return }
         
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let url = URL(string: self.imageUrl!)!
             let data = try? Data(contentsOf: url)
             

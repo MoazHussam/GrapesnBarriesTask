@@ -46,6 +46,7 @@ class ProductsLayout: UICollectionViewLayout {
     
     var numberOfColumns = 2
     var cellPadding: CGFloat = 6.0
+    var headerHeight: CGFloat = 100.0
     
     private var cache = [ProductsLayoutAttributes]()
     
@@ -62,6 +63,7 @@ class ProductsLayout: UICollectionViewLayout {
     override func prepare() {
         
         if cache.isEmpty {
+            
             // Pre-Calculates the X Offset for every column and adds an array to increment the currently max Y Offset for each column
             let columnWidth = contentWidth / CGFloat(numberOfColumns)
             var xOffset = [CGFloat]()
@@ -69,7 +71,7 @@ class ProductsLayout: UICollectionViewLayout {
                 xOffset.append(CGFloat(column) * columnWidth )
             }
             var column = 0
-            var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
+            var yOffset = [CGFloat](repeating: headerHeight + cellPadding * 2, count: numberOfColumns)
             
             // 3. Iterates through the list of items in the first section
             for item in 0 ..< collectionView!.numberOfItems(inSection: 0) {
@@ -108,17 +110,27 @@ class ProductsLayout: UICollectionViewLayout {
         cache.removeAll()
     }
     
-    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
         // Loop through the cache and look for items in the rect
         for attributes  in cache {
-            if attributes.frame.intersects(rect ) {
+            if attributes.frame.intersects(rect) {
                 layoutAttributes.append(attributes)
             }
         }
+        
+        if rect.intersects(CGRect(x: 0, y: 0, width: contentWidth, height: 150)) {
+            
+            let frame = CGRect(x: 0, y: 0, width: contentWidth, height: 100)
+            let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: IndexPath(item: 0, section: 0))
+            let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+            headerAttribute.frame = insetFrame
+            headerHeight = insetFrame.height
+            layoutAttributes.append(headerAttribute)
+        }
+        
         return layoutAttributes
     }
     

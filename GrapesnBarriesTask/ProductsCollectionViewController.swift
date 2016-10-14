@@ -13,9 +13,12 @@ private let reuseIdentifier = "ProductsCell"
 
 class ProductsCollectionViewController: UICollectionViewController {
     
+    // reusable header view
+    @IBOutlet weak var headerView: UIView!
     
     // MARK: Global Constants
     let patchCount = 3
+    let headerReuseIdentifier = "HeaderView"
     
     // MARK: Global Variables
     var labelFont: UIFont!
@@ -30,9 +33,23 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     // update collection view cells and layout
     @objc private func updateUI() {
-
+        
         DispatchQueue.main.async {
-            self.collectionView!.reloadData()
+            print("Update UI")
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    func updateCell(notification: NSNotification) {
+        
+        let sender = notification.object
+        
+        if let product = sender as? Product {
+            let id = product.id
+            let indexPath = IndexPath(item: id, section: 0)
+            
+            collectionView?.reloadItems(at: [indexPath])
+            print("Updating Cell \(product.id)")
         }
     }
     
@@ -51,8 +68,10 @@ class ProductsCollectionViewController: UICollectionViewController {
         collectionView!.backgroundColor = UIColor.clear
         collectionView!.contentInset = UIEdgeInsets(top: 23, left: 5, bottom: 10, right: 5)
         
+        collectionView?.register(HeaderReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        
         //register for notification that product images finished downloading in the backgroud
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name(rawValue: imageDataDidFinishedDownloadingNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCell(notification:)), name: Notification.Name(rawValue: imageDataDidFinishedDownloadingNotification), object: nil)
         
         // get products fetcher
         getNextThreeProducts = makeProductsFetcher()
@@ -75,7 +94,7 @@ class ProductsCollectionViewController: UICollectionViewController {
         if offsetY > contentHeight - scrollView.frame.size.height + 20 {
             print("scroll ended")
             getNextThreeProducts()
-            collectionView?.reloadData()
+            //collectionView?.reloadData()
         }
 
     }
@@ -104,7 +123,19 @@ class ProductsCollectionViewController: UICollectionViewController {
         return 1
     }
 
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
 
+        let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! HeaderReusableView
+        
+        headerView.frame = reusableView.bounds
+        reusableView.addSubview(headerView)
+        
+        return reusableView        
+    }
+    
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return (products?.count) ?? 2

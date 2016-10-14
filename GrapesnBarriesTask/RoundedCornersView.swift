@@ -8,13 +8,25 @@
 
 import UIKit
 
+protocol RoundedCornersViews {
+    var cornerRadius: CGFloat { set get }
+    
+}
+
+extension RoundedCornersViews {
+    
+    func setRoundedCorners(forView view: UIView) {
+        view.layer.cornerRadius = cornerRadius
+        view.layer.masksToBounds = cornerRadius > 0
+    }
+}
+
 @IBDesignable
-class RoundedCornersView: UIView {
+class RoundedCornersView: UIView, RoundedCornersViews {
   
   @IBInspectable var cornerRadius: CGFloat = 0 {
     didSet {
-      layer.cornerRadius = cornerRadius
-      layer.masksToBounds = cornerRadius > 0
+      setRoundedCorners(forView: self)
     }
   }
   
