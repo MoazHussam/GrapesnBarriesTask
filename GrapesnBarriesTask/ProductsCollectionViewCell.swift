@@ -20,17 +20,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             imageLoadingSpinner.startAnimating()
         }
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
         
-        self.frame.size = CGSize(width: 367, height: 750)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     var product: Product? {
         didSet {
             if product != nil {

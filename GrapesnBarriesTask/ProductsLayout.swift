@@ -114,12 +114,7 @@ class ProductsLayout: UICollectionViewLayout {
         
         if elementKind == UICollectionElementKindSectionHeader {
             
-            let frame = CGRect(x: 0, y: 0, width: contentWidth, height: 100)
-            let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: indexPath)
-            let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
-            headerAttribute.frame = insetFrame
-            headerHeight = insetFrame.height
-            return headerAttribute
+            return getHeaderAttributes(for: indexPath)
             
         }
         return nil
@@ -137,19 +132,25 @@ class ProductsLayout: UICollectionViewLayout {
         }
         
         if rect.intersects(CGRect(x: 0, y: 0, width: contentWidth, height: 150)) {
+        
+            let headerAttribute = getHeaderAttributes(for: IndexPath(item: 0, section: 0))
             
-            let frame = CGRect(x: 0, y: 0, width: contentWidth, height: 100)
-            let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: IndexPath(item: 0, section: 0))
-            let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
-            headerAttribute.frame = insetFrame
-            headerHeight = insetFrame.height
             layoutAttributes.append(headerAttribute)
         }
         
         return layoutAttributes
     }
     
-    
+    fileprivate func getHeaderAttributes(for indexPath: IndexPath) -> UICollectionViewLayoutAttributes {
+        
+        let frame = CGRect(x: 0, y: 0, width: contentWidth, height: 100)
+        let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: indexPath)
+        let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+        headerAttribute.frame = insetFrame
+        headerHeight = insetFrame.height
+        return headerAttribute
+
+    }
     
     
     

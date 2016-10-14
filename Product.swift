@@ -32,7 +32,7 @@ class Product {
         self.price = price
     }
     
-    func getImage(forProduct product: Product, completionHandler: @escaping ()-> Void) {
+    private func getImage(forProduct product: Product, completionHandler: @escaping ()-> Void) {
             
         if product.image != nil { return }
         
@@ -46,7 +46,7 @@ class Product {
             } else {
                 print("Failed to fetch image id \(product.id), attempting again")
                 self.getImage(forProduct: product, completionHandler: completionHandler)
-                
+                return
             }
             
         }
