@@ -42,10 +42,11 @@ class Product {
             
             if let imageData = data {
                 product.image = imageData
+                completionHandler()
             } else {
                 print("Failed to fetch image id \(product.id), attempting again")
                 self.getImage(forProduct: product, completionHandler: completionHandler)
-                return
+                
             }
             
         }

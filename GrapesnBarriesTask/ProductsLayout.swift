@@ -110,6 +110,21 @@ class ProductsLayout: UICollectionViewLayout {
         cache.removeAll()
     }
     
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        
+        if elementKind == UICollectionElementKindSectionHeader {
+            
+            let frame = CGRect(x: 0, y: 0, width: contentWidth, height: 100)
+            let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: indexPath)
+            let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+            headerAttribute.frame = insetFrame
+            headerHeight = insetFrame.height
+            return headerAttribute
+            
+        }
+        return nil
+    }
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()

@@ -23,6 +23,7 @@ class ProductsCollectionViewController: UICollectionViewController {
     // MARK: Global Variables
     var labelFont: UIFont!
     var scrollViewReachedBottom = false
+    var userIsScrolling = false
     var getNextThreeProducts: (() -> Void)!
     var products: [Product]? {
         didSet {
@@ -46,14 +47,22 @@ class ProductsCollectionViewController: UICollectionViewController {
         let sender = notification.object
         
         if let product = sender as? Product {
-            let id = product.id
-            let indexPath = IndexPath(item: id, section: 0)
+            let index = product.id
+            let indexPath = IndexPath(item: index, section: 0)
             
-            collectionView?.reloadItems(at: [indexPath])
-            print("Updating Cell \(product.id)")
+            DispatchQueue.main.async {
+                let validIndices = self.collectionView?.visibleCells.map { self.collectionView!.indexPath(for: $0)! }
+                if let exists = validIndices?.contains(where: { $0 == indexPath  }) , exists, self.userIsScrolling {
+                    print("Cell \(indexPath.item) exists")
+                    self.collectionView?.reloadItems(at: [indexPath])
+                    
+                    print("Updating Cell \(indexPath.item)")
+                }
+            }
+            
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -102,6 +111,14 @@ class ProductsCollectionViewController: UICollectionViewController {
             scrollViewReachedBottom = false
         }
 
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        userIsScrolling = true
+    }
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        userIsScrolling = true
     }
     
     func fetchProducts(fromID startID:Int, count patchCount:Int) {
