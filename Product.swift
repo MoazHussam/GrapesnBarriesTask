@@ -33,22 +33,24 @@ class Product {
     }
     
     private func getImage(forProduct product: Product, completionHandler: @escaping ()-> Void) {
-            
-        if product.image != nil { return }
         
         DispatchQueue.global(qos: .userInitiated).async {
-            let url = URL(string: self.imageUrl!)!
-            let data = try? Data(contentsOf: url)
             
-            if let imageData = data {
-                product.image = imageData
-                completionHandler()
-            } else {
-                print("Failed to fetch image id \(product.id), attempting again")
-                self.getImage(forProduct: product, completionHandler: completionHandler)
-                return
-            }
-            
+            let url = URL(string: product.imageUrl!)!
+            product.image = Product.getImageContent(url: url, forID: product.id)
+            completionHandler()
+        }
+        
+    }
+    
+    private static func getImageContent(url: URL, forID id: Int) -> Data {
+        let data = try? Data(contentsOf: url)
+        
+        if let imageData = data {
+            return imageData
+        } else {
+            print("Failed to fetch image id \(id), attempting again")
+            return getImageContent(url: url, forID: id)
         }
         
     }

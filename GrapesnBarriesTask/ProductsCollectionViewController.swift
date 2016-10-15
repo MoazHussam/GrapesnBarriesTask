@@ -32,6 +32,118 @@ class ProductsCollectionViewController: UICollectionViewController {
         }
     }
     
+    // MARK: view controller life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        //set custom layout delegate
+        if let layout = collectionView?.collectionViewLayout as? ProductsLayout {
+            layout.delegate = self
+        }
+        
+        // set view visual look
+        if let patternImage = UIImage(named: "Pattern") {
+            view.backgroundColor = UIColor(patternImage: patternImage)
+        }
+        collectionView!.backgroundColor = UIColor.clear
+        collectionView!.contentInset = UIEdgeInsets(top: 23, left: 5, bottom: 10, right: 5)
+        
+        collectionView?.register(HeaderReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        
+        //register for notification that product images finished downloading in the backgroud
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCell(notification:)), name: Notification.Name(rawValue: imageDataDidFinishedDownloadingNotification), object: nil)
+        
+        // get products fetcher
+        getNextThreeProducts = makeProductsFetcher()
+        
+        getNextThreeProducts()
+        getNextThreeProducts()
+
+    }
+
+    
+    // MARK: UICollectionViewDataSource
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+
+        let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! HeaderReusableView
+        
+        headerView.frame = reusableView.bounds
+        reusableView.addSubview(headerView)
+        
+        return reusableView        
+    }    
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return (products?.count) ?? 2
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProductsCollectionViewCell
+    
+        // Configure the cell
+        
+        //clear cache for reusable cells to clean cached images
+        cell.clearCache()
+        
+        cell.product = products?[indexPath.item]
+        
+        //need font to calculate label height at runtime
+        labelFont = cell.productDescription.font
+        
+        return cell
+    }
+    
+    // MARK: scrollView Delegate Methods
+    
+    // when scroll ends add new cells
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if collectionView?.window == nil { return }
+        
+        let offsetTolerance = CGFloat(30)
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.size.height + offsetTolerance, !scrollViewReachedBottom {
+            print("scroll ended")
+            getNextThreeProducts()
+            scrollViewReachedBottom = true
+        } else if offsetY < contentHeight - scrollView.frame.size.height - offsetTolerance {
+            scrollViewReachedBottom = false
+        }
+        
+    }
+    
+    // MARK: Helper Methods
+    
+    func fetchProducts(fromID startID:Int, count patchCount:Int) {
+        
+        GnBClient.sharedInstance().getProducts(fromID: startID , count: patchCount, products: { (productsArray) in
+            
+            guard self.products != nil || productsArray != nil else { return }
+            self.products = (self.products ?? [Product]()) + (productsArray ?? [Product]())
+            self.reorderProducts()
+            print("\(patchCount) Products fetched starting from ID: \(startID)")
+            
+        })
+    }
+    
+    private func reorderProducts() {
+        
+        products?.sort { $0.id < $1.id }
+    }
+    
     // update collection view cells and layout
     @objc private func updateUI() {
         
@@ -62,116 +174,10 @@ class ProductsCollectionViewController: UICollectionViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        //set custom layout delegate
-        if let layout = collectionView?.collectionViewLayout as? ProductsLayout {
-            layout.delegate = self
-        }
-        
-        // set view visual look
-        if let patternImage = UIImage(named: "Pattern") {
-            view.backgroundColor = UIColor(patternImage: patternImage)
-        }
-        collectionView!.backgroundColor = UIColor.clear
-        collectionView!.contentInset = UIEdgeInsets(top: 23, left: 5, bottom: 10, right: 5)
-        
-        collectionView?.register(HeaderReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
-        
-        //register for notification that product images finished downloading in the backgroud
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCell(notification:)), name: Notification.Name(rawValue: imageDataDidFinishedDownloadingNotification), object: nil)
-        
-        // get products fetcher
-        getNextThreeProducts = makeProductsFetcher()
-        
-        getNextThreeProducts()
-        getNextThreeProducts()
-
-    }
-
-    // MARK: scrollView Delegate Methods
-    
-    // when scroll ends add new cells
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if collectionView?.window == nil { return }
-        
-        let offsetTolerance = CGFloat(30)
-        
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if offsetY > contentHeight - scrollView.frame.size.height + offsetTolerance, !scrollViewReachedBottom {
-            print("scroll ended")
-            getNextThreeProducts()
-            scrollViewReachedBottom = true
-        } else if offsetY < contentHeight - scrollView.frame.size.height - offsetTolerance {
-            scrollViewReachedBottom = false
-        }
-
-    }
-    
-    func fetchProducts(fromID startID:Int, count patchCount:Int) {
-        
-        GnBClient.sharedInstance().getProducts(fromID: startID , count: patchCount, products: { (productsArray) in
-            
-            guard self.products != nil || productsArray != nil else { return }
-            self.products = (self.products ?? [Product]()) + (productsArray ?? [Product]())
-            self.reorderProducts()
-            print("\(patchCount) Products fetched starting from ID: \(startID)")
-            
-        })
-    }
-    
-    func reorderProducts() {
-        
-        products?.sort { $0.id < $1.id }
-    }
-    
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-
-        let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! HeaderReusableView
-        
-        headerView.frame = reusableView.bounds
-        reusableView.addSubview(headerView)
-        
-        return reusableView        
-    }
-    
-    
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return (products?.count) ?? 2
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProductsCollectionViewCell
-    
-        // Configure the cell
-        
-        //clear cache for reusable cells to clean cached images
-        cell.clearCache()
-        
-        cell.product = products?[indexPath.item]
-        
-        //need font to calculate label height at runtime
-        labelFont = cell.productDescription.font
-        
-        return cell
-    }
-
 }
 
+
+// MARK: Extentions
 
 extension ProductsCollectionViewController : ProductsLayoutDelegate {
     
